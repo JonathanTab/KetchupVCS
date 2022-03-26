@@ -1,0 +1,25 @@
+{
+    "name": "ketchupvcs",
+    "version": "0.1.0",
+    "description": "Simple version control system",
+    "main": "src/main.js",
+    "scripts": {
+        "run": "node src/main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JonathanTab/KetchupVCS.git"
+    },
+    "author": "Jonathan Tabeling",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "bugs": {
+        "url": "https://github.com/JonathanTab/KetchupVCS/issues"
+    },
+    "homepage": "https://github.com/JonathanTab/KetchupVCS#readme",
+    "devDependencies": {
+        "jest": "^27.5.1"
+    },
+    "dependencies": {
+        "env-paths": "^3.0.0"
+    }
+}
