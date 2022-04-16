@@ -18,12 +18,15 @@
     },
     "homepage": "https://github.com/JonathanTab/KetchupVCS#readme",
     "devDependencies": {
-        "jest": "^27.5.1"
+        "eslint": "^8.13.0",
+        "jest": "^27.5.1",
+        "pino-pretty": "^7.6.1"
     },
     "dependencies": {
         "chokidar": "^3.5.3",
         "dropbox": "^10.27.0",
         "env-paths": "^3.0.0",
-        "hidefile": "^3.0.0"
+        "hidefile": "^3.0.0",
+        "pino": "^7.10.0"
     }
 }

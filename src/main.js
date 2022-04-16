@@ -1,7 +1,7 @@
 //Base stuff
 import fs from 'fs';
 import path from 'path';
-
+import log from './log.js'
 
 //packages
 
@@ -16,11 +16,15 @@ import Config from './config.js';
 var config = new Config('KetchupVCS')
 
 
-console.log(config.project_root);
+log.info(config.project_root);
 
 
-//Start watching project folders
-const watcher = chokidar.watch('file, dir, glob, or array', {
-    ignored: /(^|[\/\\])\../, // ignore dotfiles
+//Start the watch loop
+const watcher = chokidar.watch(config.project_root, {
+    ignored: /(^|[/\\])\../, // ignore dotfiles
     persistent: true
 });
+watcher
+    .on('addDir', path => log.warn(`Directory ${path} has been added`))
+    .on('ready', path => log.info(`Directory ${path} has been added`))
+
