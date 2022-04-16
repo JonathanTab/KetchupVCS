@@ -1,0 +1,30 @@
+//Currently the only thing this stores is the revision tree and project name
+//SCHEMA
+//{ "revisions" : [ {'timestamp': '123123', 'author': 'shop-pc', 'changed': ['path': 'demo-brace.skp', 'changetype': 'saved', 'thumbnail': 'base64']},... ], "projectname": "something"  }
+//
+
+
+export default class ProjectFile {
+    revisions = []
+    projectname = ""
+    constructor(path) {
+        //path is literal path to the project file
+        //if not exist, fill out schema with skeleton project file, then write to file
+        //else, load file into schema
+
+        this.save()
+
+        this.load()
+
+    }
+
+    async save() {
+
+    }
+    async load() {
+
+    }
+    appendRevision(revision) {
+        this.save()
+    }
+}
