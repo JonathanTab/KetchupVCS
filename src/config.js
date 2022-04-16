@@ -6,6 +6,7 @@ import log from './log.js'
 
 //SCHEMA
 // project_root = folder for projects
+// username = name to attribute revisions to
 
 export default class Config {
 
@@ -15,6 +16,7 @@ export default class Config {
 
         //Make config dir if neccesary
         if (!fs.existsSync(this.envpaths.config)) {
+            log.info("Creating config dirs")
             util.createDirectories(this.envpaths.config);
         }
         //define settings.json filename with envpaths.config variable file path as configfilename
@@ -23,26 +25,30 @@ export default class Config {
 
         // Write base config to file if it doesnt exist
         if (!fs.existsSync(this.configfilename)) {
+            log.info("no settings file, creating")
             // Fill out project root
-            this.update_project_root();
+            this.update_config();
             this.write_config()
 
         } else {
             //read settings.json
-            let config = JSON.parse(fs.readFileSync(this.configfilename))
-            this.project_root = config.project_root
+            let file = JSON.parse(fs.readFileSync(this.configfilename))
+            this.project_root = file.project_root
+            this.project_root = file.project_root
         }
     }
 
-    update_project_root() {
+    update_config() {
         this.project_root = "csdsddv"
+        this.username = 'jonathan'
     }
     write_config() {
-        let config = {};
-        config.project_root = this.project_root
+        let file = {};
+        file.project_root = this.project_root
+        file.project_root = this.project_root
 
         //stringify the json "baseconfig" object and write it syncroniously (wait until it is created to proceed)
-        fs.writeFileSync(this.configfilename, JSON.stringify(config))
+        fs.writeFileSync(this.configfilename, JSON.stringify(file))
     }
 
 }

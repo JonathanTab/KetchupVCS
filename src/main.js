@@ -1,6 +1,6 @@
 //Base stuff
 import fs from 'fs';
-import path from 'path';
+import pathlib from 'path';
 import log from './log.js'
 
 //packages
@@ -16,15 +16,19 @@ import Config from './config.js';
 var config = new Config('KetchupVCS')
 
 
-log.info(config.project_root);
-
-
 //Start the watch loop
 const watcher = chokidar.watch(config.project_root, {
     ignored: /(^|[/\\])\../, // ignore dotfiles
     persistent: true
 });
-watcher
-    .on('addDir', path => log.warn(`Directory ${path} has been added`))
-    .on('ready', path => log.info(`Directory ${path} has been added`))
+watcher.on('error', error => log.error(`Watcher error: ${error}`))
+watcher.on('ready', function () {
+    watcher.on('all', (event, path) => { handleChange(event, path); });
+})
 
+async function handleChange(event, path) {
+
+    if (!/\/|\\/.test(pathlib.relative(config.project_root, path))) {
+
+    }
+}
