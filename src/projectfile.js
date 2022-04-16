@@ -22,20 +22,19 @@ export default class ProjectFile {
         else{
             this.load()
         }
- 
-
-
-
     }
 
     async save() {
-        fs.writeFileSync(this.path, JSON.stringify(this.revisions + this.projectname))
+        let file;
+        file.revisions = this.revisions
+        file.projectname = this.projectname
+        fs.writeFileSync(this.path, JSON.stringify(file))
 
     }
     async load() {
-        
-        theparseddata = JSON.parse(fs.readFileSync(this.path))
-        console.log(theparseddata)
+        let file = JSON.parse(fs.readFileSync(this.path))
+        this.revisions = file.revisions
+        this.projectname = file.projectname
     }
     appendRevision(revision) {
         this.save()
