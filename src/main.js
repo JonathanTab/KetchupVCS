@@ -11,9 +11,13 @@ import chokidar from 'chokidar';
 import * as util from './util.js';
 
 
-//init app data
-const paths = envPaths("KetchupVCS", { 'suffix': '' });
+//init app config
+const envpaths = envPaths("KetchupVCS", { 'suffix': '' });
 
-if (!fs.existsSync(paths.config)) {
-    util.createDirectoriesForFile(paths.config);
-}
+
+
+if (!fs.existsSync(envpaths.config)) {
+    util.createDirectories(envpaths.config);
+};
+
+console.log(envpaths)

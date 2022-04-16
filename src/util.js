@@ -9,7 +9,7 @@ export function log(text, end = "\n") {
     process.stdout.write(text + end);
 }
 
-export function createDirectoriesForFile(pathname) {
+export function createDirectories(pathname) {
     const __dirname = path.resolve();
     pathname = pathname.replace(/^\.*\/|\/?[^\/]+\.[a-z]+|\/$/g, ''); // Remove leading directory markers, and remove ending /file-name.extension
     fs.mkdir(path.resolve(__dirname, pathname), { recursive: true }, e => {
