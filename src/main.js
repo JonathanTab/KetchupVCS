@@ -31,6 +31,9 @@ if (!fs.existsSync(configfilename)){
     //stringify the json "baseconfig" object and write it syncroniously (wait until it is created to proceed)
     fs.writeFileSync(configfilename, JSON.stringify(baseconfig))
 }
+//read settings.json
+let yourlocalsettings = JSON.parse(fs.readFileSync (configfilename))
+
 
 //Start watching project folders
 const watcher = chokidar.watch('file, dir, glob, or array', {
