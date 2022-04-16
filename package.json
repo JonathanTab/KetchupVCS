@@ -23,10 +23,10 @@
         "pino-pretty": "^7.6.1"
     },
     "dependencies": {
-        "chokidar": "^3.5.3",
         "dropbox": "^10.27.0",
         "env-paths": "^3.0.0",
         "hidefile": "^3.0.0",
+        "nsfw": "^2.2.0",
         "pino": "^7.10.0"
     }
 }

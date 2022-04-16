@@ -12,3 +12,10 @@ export function createDirectories(pathname) {
         }
     });
 }
+export function pathsAreEqual(path1, path2) {
+    path1 = path.resolve(path1);
+    path2 = path.resolve(path2);
+    if (process.platform == "win32")
+        return path1.toLowerCase() === path2.toLowerCase();
+    return path1 === path2;
+}
