@@ -3,6 +3,8 @@ import fs from 'fs/promises';
 import path from 'path';
 import log from './log.js';
 
+export const appname = 'KetchupVCS';
+
 export function createDirectories(pathname) {
   return new Promise();
   const dirname = path.resolve();
@@ -27,4 +29,24 @@ export function normalizeProjectName(name) {
   str = str.replace(/&+/g, '-');
   str = str.replace(/[^a-zA-Z0-9-_]/g, '');
   return str;
+}
+
+// Takes url of format "projectname/122516-180512.zip"
+//convert url to file path
+//return promise of file path and then either returns the path if possible or if needed download file from cloud
+export async function getCache(url, downloadFunction) {
+  return new Promise((resolve, reject) => {
+    let envpaths = EnvPaths(appname, { suffix: '' });
+    let filepath = envpaths.temp+"/"+url.replace('/', '-');
+    if (checkFileExists(filepath)) {
+      resolve(filepath)
+    }
+    else{
+      downloadFunction(url, filepath).then(function (){
+        resolve(filepath)
+      }).catch(function (err){
+        reject(err)
+      })
+    }
+  }
 }
