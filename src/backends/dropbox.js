@@ -8,7 +8,6 @@ import { Dropbox } from 'dropbox';
 // Our code
 import log from '../log.js';
 import * as util from '../util.js';
-import { readFile } from 'fs';
 
 // We need:
 // downloadFile(url, path), downloads file from dropbox root folder
@@ -26,13 +25,12 @@ export default class DropboxBackend {
     return (this.config.data.dropboxBackend.token && this.config.data.dropboxBackend.rootFolder);
   }
 
-  init(){
-    if (this.isConfigured() == true){
-      this.dbx = new Dropbox.Dropbox({ accessToken: this.config.data.dropboxBackend.token});
-      return true
-    } else {
-      return false
+  init() {
+    if (this.isConfigured() == true) {
+      this.dbx = new Dropbox.Dropbox({ accessToken: this.config.data.dropboxBackend.token });
+      return true;
     }
+    return false;
   }
 
   downloadFile(url, filepath) {
@@ -49,17 +47,17 @@ export default class DropboxBackend {
 
   storeFile(url, filepath) {
     return new Promise((resolve, reject) => {
-      file = fs.readFile (filepath, (err,data )){}
-      readFile(filepath).then(fileBuffer => {
-        dbx.filesUpload({path: this.config.data.dropboxBackend.rootFolder+"/"+url, contents: fileBuffer})
-        .then(function(response) {
-        })
-        .catch(function(error) {
-          console.error(error);
-        });
-      }).catch(error => {
-        console.error(error.message);
-        process.exit(1);
+      fs.readFile(filepath).then((fileBuffer) => {
+        this.dbx.filesUpload({ path: `${this.config.data.dropboxBackend.rootFolder}/${url}`, contents: fileBuffer })
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
+}
