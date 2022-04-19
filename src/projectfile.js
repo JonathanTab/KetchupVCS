@@ -42,7 +42,7 @@ export default class ProjectFile {
           this.revisions = file.revisions;
           this.projectname = file.projectname;
         } catch (error) {
-          log.error(error);
+          reject(error);
         }
         resolve();
       }).catch((err) => {

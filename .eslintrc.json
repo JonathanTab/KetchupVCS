@@ -19,7 +19,7 @@
     "no-restricted-syntax": "off",
     "import/extensions": "off",
     "max-len": [
-      "error",
+      "warn",
       145,
       2,
       {
